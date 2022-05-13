@@ -1,0 +1,18 @@
+name: test
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/junaruga/ruby-ci-image:gcc-11
+      # This option doesn't work?
+      # options: --user root -v /__w/gha-container-volume-test/gha-container-volume-test/build:/work/:rw
+      options: --user root
+    steps:
+      - uses: actions/checkout@v2
+      - run: pwd
+        working-directory: build
+      - run: ls -l
+        working-directory: build
+      - run: ../test-annocheck.sh ruby libruby.so.3.2.0
+        working-directory: build
