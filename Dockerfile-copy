@@ -1,0 +1,7 @@
+ARG FILES
+FROM docker.io/fedora:latest
+
+RUN dnf -y install annobin-annocheck
+RUN mkdir /work
+COPY build/${FILES} /work
+WORKDIR /work
